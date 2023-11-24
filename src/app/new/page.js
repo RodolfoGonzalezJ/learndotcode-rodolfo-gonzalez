@@ -1,6 +1,6 @@
 function Page() {
   return (
-    <div>Task form</div>
+    <div>Course form</div>
   )
 }
 
