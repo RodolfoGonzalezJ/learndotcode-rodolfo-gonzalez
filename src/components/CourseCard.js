@@ -1,8 +1,14 @@
-import { Image } from "next/image";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export const CourseCard = ({ course }) => {
+  const router = useRouter();
+
   return (
-    <div>
+    <div
+      style={{ background: "white", color: "black" }}
+      onClick={() => router.push(`/edit/${course.id}`)}
+    >
       <div>
         <Image
           src={course.image}
@@ -15,6 +21,7 @@ export const CourseCard = ({ course }) => {
         <div>
           <h2>{course.title}</h2>
         </div>
+        <button>Borrar</button>
         <div>${course.price}</div>
         <div>{course.description}</div>
       </div>
