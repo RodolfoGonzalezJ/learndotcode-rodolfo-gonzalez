@@ -91,11 +91,20 @@ export const CourseProvider = ({ children }) => {
       },
     ]);
 
-  const deleteCourse = (id) => 
+  const deleteCourse = (id) =>
     setCourse([...courses.filter((course) => course.id !== id)]);
 
+  const updateCourse = (id, newData) =>
+    setCourse([
+      ...courses.map((course) =>
+        course.id === id ? { ...course, ...newData } : course
+      ),
+    ]);
+
   return (
-    <CourseContext.Provider value={{ courses, createCourse, deleteCourse }}>
+    <CourseContext.Provider
+      value={{ courses, createCourse, deleteCourse, updateCourse }}
+    >
       {children}
     </CourseContext.Provider>
   );

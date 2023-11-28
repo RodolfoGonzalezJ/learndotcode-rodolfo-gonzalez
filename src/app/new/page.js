@@ -11,7 +11,7 @@ function Page({params}) {
     description: "",
     image: ""
   });
-  const { courses, createCourse } = useCourses();
+  const { courses, createCourse, updateCourse} = useCourses();
   const router = useRouter();
 
   const handleChange = (e) =>
@@ -21,7 +21,7 @@ function Page({params}) {
     e.preventDefault();
 
     if (params.id){
-      console.log("editando")
+      updateCourse(params.id, course)
     } else {
       createCourse(course.title, course.price, course.description, course.image);
     }
