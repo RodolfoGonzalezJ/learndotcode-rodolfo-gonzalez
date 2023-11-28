@@ -19,7 +19,7 @@ export const CourseProvider = ({ children }) => {
       price: 224,
       image: "http://localhost:3000/img/HTML.webp",
       description:
-        "¿Queres hacer una página web con HTML, CSS y JavaScript? Este es el curso de HTML desde cero que vas a terminar, te prometo que no te vas a aburrir durante el aprendizaje de este gran tutorial de HTML5.",
+        "¿Quieres hacer una página web con HTML, CSS y JavaScript? Este es el curso de HTML desde cero que vas a terminar, te prometo que no te vas a aburrir durante el aprendizaje de este gran tutorial de HTML5.",
     },
     {
       id: 1,
@@ -27,7 +27,7 @@ export const CourseProvider = ({ children }) => {
       price: 994,
       image: "http://localhost:3000/img/CSS.webp",
       description:
-        "¿Queres hacer una página web con HTML, CSS y JavaScript? Este es el curso de CSS desde cero a experto que vas a terminar, te prometo que no te vas a aburrir durante el aprendizaje de este curso de CSS 3, vas a aprender CSS facil.",
+        "¿Quieres hacer una página web con HTML, CSS y JavaScript? Este es el curso de CSS desde cero a experto que vas a terminar, te prometo que no te vas a aburrir durante el aprendizaje de este curso de CSS 3, vas a aprender CSS facil.",
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ export const CourseProvider = ({ children }) => {
       price: 1000,
       image: "http://localhost:3000/img/JAVASCRIPT.webp",
       description:
-        "¿Queres aprender a programar en Javascript desde cero? Este es el curso de javascript desde cero a experto que vas a terminar, te prometo que no te vas a aburrir durante el aprendizaje de este curso de javascript, vas a aprender javascript fácil.",
+        "¿Quieres aprender a programar en Javascript desde cero? Este es el curso de javascript desde cero a experto que vas a terminar, te prometo que no te vas a aburrir durante el aprendizaje de este curso de javascript, vas a aprender javascript fácil.",
     },
     {
       id: 3,
@@ -91,8 +91,11 @@ export const CourseProvider = ({ children }) => {
       },
     ]);
 
+  const deleteCourse = (id) => 
+    setCourse([...courses.filter((course) => course.id !== id)]);
+
   return (
-    <CourseContext.Provider value={{ courses, createCourse }}>
+    <CourseContext.Provider value={{ courses, createCourse, deleteCourse }}>
       {children}
     </CourseContext.Provider>
   );

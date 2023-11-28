@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useCourses } from "../context/CoursesContext";
 
 export const CourseCard = ({ course }) => {
   const router = useRouter();
-
+  const { deleteCourse } = useCourses();
   return (
     <div
       style={{ background: "white", color: "black" }}
@@ -21,7 +22,17 @@ export const CourseCard = ({ course }) => {
         <div>
           <h2>{course.title}</h2>
         </div>
-        <button>Borrar</button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            const accept = window.confirm(
+              "¿Estás seguro que quieres eliminar este curso?"
+            );
+            if (accept) deleteCourse(course.id);
+          }}
+        >
+          Borrar
+        </button>
         <div>${course.price}</div>
         <div>{course.description}</div>
       </div>
