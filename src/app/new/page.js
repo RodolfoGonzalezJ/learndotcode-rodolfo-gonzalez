@@ -26,7 +26,7 @@ function Page({ params }) {
         data.title,
         data.price,
         data.description,
-        
+        data.image
       );
       toast.success('Curso creado exitosamente')
     }
