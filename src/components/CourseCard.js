@@ -8,22 +8,24 @@ export const CourseCard = ({ course }) => {
   const { deleteCourse } = useCourses();
   return (
     <div
-      style={{ background: "white", color: "black" }}
+      className="bg-white px-5 py-5 cursor-pointer m-2 "
       onClick={() => router.push(`/edit/${course.id}`)}
     >
-      <div>
-        <Image
-          src={course.image}
-          alt="Picture of the author"
-          width={400}
-          height={227}
-        />
-      </div>
-      <div>
+      <div className="flex justify-between h-5/6 px-28 py-10 gap-2">
         <div>
-          <h2>{course.title}</h2>
+          <Image
+            src={course.image}
+            alt="Picture of the author"
+            width={400}
+            height={227}
+          />
+        </div>
+        <div>
+          <h2 className="text-2xl">{course.title}</h2>
+          <div className="text-base">${course.price}</div>
         </div>
         <button
+          className="bg-red-700 hover:bg-red-600 px-3 py-1 inline-flex items-center h-10 rounded-sm"
           onClick={(e) => {
             e.stopPropagation();
             const accept = window.confirm(
@@ -31,15 +33,14 @@ export const CourseCard = ({ course }) => {
             );
             if (accept) {
               deleteCourse(course.id);
-              toast.success('Curso eliminado exitosamente')
+              toast.success("Curso eliminado exitosamente");
             }
           }}
         >
           Borrar
         </button>
-        <div>${course.price}</div>
-        <div>{course.description}</div>
       </div>
+      <div className="h-5/6 px-28 py-2">{course.description}</div>
     </div>
   );
 };

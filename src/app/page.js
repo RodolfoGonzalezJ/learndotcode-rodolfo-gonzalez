@@ -6,10 +6,12 @@ import { CourseCard } from "../components/CourseCard";
 function Page() {
   const { courses } = useCourses();
   return (
-    <div>
-      {courses.map((course) => (
-        <CourseCard course={course} key={course.id} />
-      ))}
+    <div className="flex justify-center gap-10 bg-background-body">
+      <div className="w-7/12 ">
+        {courses.map((course) => (
+          <CourseCard course={course} key={course.id} />
+        ))}
+      </div>
     </div>
   );
 }
