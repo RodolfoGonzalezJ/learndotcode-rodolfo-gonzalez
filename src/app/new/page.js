@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useCourses } from "../../context/CoursesContext";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 function Page({ params }) {
   const { courses, createCourse, updateCourse } = useCourses();
@@ -19,13 +20,15 @@ function Page({ params }) {
   const onSubmit = handleSubmit((data) => {
     if (params.id) {
       updateCourse(params.id, data);
+      toast.success('Curso actualizado exitosamente')
     } else {
       createCourse(
         data.title,
         data.price,
         data.description,
-        data.image
+        
       );
+      toast.success('Curso creado exitosamente')
     }
 
     router.push("/");

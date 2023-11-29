@@ -1,5 +1,6 @@
 import { Navbar } from "../components/Navbar";
 import { CourseProvider } from "../context/CoursesContext";
+import { Toaster } from "react-hot-toast";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <CourseProvider>
           <Navbar/>
           {children}
+          <Toaster/>
         </CourseProvider>
       </body>
     </html>

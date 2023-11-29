@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCourses } from "../context/CoursesContext";
+import { toast } from "react-hot-toast";
 
 export const CourseCard = ({ course }) => {
   const router = useRouter();
@@ -28,7 +29,10 @@ export const CourseCard = ({ course }) => {
             const accept = window.confirm(
               "¿Estás seguro que quieres eliminar este curso?"
             );
-            if (accept) deleteCourse(course.id);
+            if (accept) {
+              deleteCourse(course.id);
+              toast.success('Curso eliminado exitosamente')
+            }
           }}
         >
           Borrar
