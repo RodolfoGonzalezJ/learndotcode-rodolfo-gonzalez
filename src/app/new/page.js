@@ -3,69 +3,69 @@
 import { useState, useEffect } from "react";
 import { useCourses } from "../../context/CoursesContext";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 
-function Page({params}) {
-  const [course, setCourse] = useState({
-    title: "",
-    price: "",
-    description: "",
-    image: ""
-  });
-  const { courses, createCourse, updateCourse} = useCourses();
+function Page({ params }) {
+  const { courses, createCourse, updateCourse } = useCourses();
   const router = useRouter();
 
-  const handleChange = (e) =>
-    setCourse({ ...course, [e.target.name]: e.target.value });
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (params.id){
-      updateCourse(params.id, course)
+  const onSubmit = handleSubmit((data) => {
+    if (params.id) {
+      updateCourse(params.id, data);
     } else {
-      createCourse(course.title, course.price, course.description, course.image);
+      createCourse(
+        data.title,
+        data.price,
+        data.description,
+        data.image
+      );
     }
-    
+
     router.push("/");
-  };
+  });
 
   useEffect(() => {
     if (params.id) {
       const courseFound = courses.find((course) => course.id === params.id);
-      if (courseFound)
-        setCourse({
-          title: courseFound.title,
-          price: courseFound.price,
-          description: courseFound.description,
-        });
+      if (courseFound){
+        setValue('title', courseFound.title)
+        setValue('price', courseFound.price)
+        setValue('description', courseFound.description)
+        setValue('image', courseFound.image)
+      }
     }
   }, []);
 
   return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data">
+    <form onSubmit={onSubmit} encType="multipart/form-data">
       <input
-        name="title"
-        placeholder="Escriba el titulo"
-        onChange={handleChange}
-        value={course.title}
+        placeholder="Escriba el título"
+        {...register("title", { required: true })}
       />
+      {errors.title && <span>Este campo es requerido</span>}
+
       <input
-        name="price"
         placeholder="Escriba el precio"
-        onChange={handleChange}
-        value={course.price}
+        {...register("price", { required: true })}
       />
+      {errors.price && <span>Este campo es requerido</span>}
+
       <textarea
-        name="description"
-        placeholder="Escriba la descripcion"
-        onChange={handleChange}
-        value={course.description}
+        placeholder="Escriba la descripción"
+        {...register("description", { required: true })}
       />
+      {errors.description && <span>Este campo es requerido</span>}
+
       <input
         name="image"
         type="file"
-        onChange={handleChange}
-        value={course.image}
       />
       <button>Guardar</button>
     </form>
